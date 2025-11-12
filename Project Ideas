@@ -1,7 +1,34 @@
 Tables:
--Store Inventory
--Store Sales
--Cards sold
+class Card
+    String id,
+    name,
+    setId,
+    setName,
+    rarity,
+    smallImg,
+
+class Set
+    String id,
+    name,
+    LocalDate,
+    releaseDate
+
+class Type
+    int id
+    String name
 
 
--TCG Market Val
+
+class Deck
+    int id,
+    String name,
+    Map<String,Integer> cardQuantities // cardId -> qty
+
+class PriceSnapshot
+    long id,
+     String cardId,
+     String source,
+     BigDecimal marketUsd,
+     BigDecimal trendEur,
+     Instant capturedAt
+
