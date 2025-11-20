@@ -1,8 +1,8 @@
-package org.example;
+package org.example.api;
 
+import org.example.DBSetUp;
 import org.example.Repository.JdbcSetRepository;
 import org.example.Repository.JdbcCardRepository;
-import org.example.api.PokemonTcgApiClient;
 import org.example.model.Set;
 import org.example.model.Card;
 
