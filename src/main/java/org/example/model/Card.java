@@ -19,7 +19,7 @@ public class Card {
         this.setId = setId;
     }
 
-    // Getters / Setters
+    // Methods
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 

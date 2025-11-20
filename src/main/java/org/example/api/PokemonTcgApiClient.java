@@ -11,7 +11,7 @@ public class PokemonTcgApiClient {
 
     private final Gson gson = new Gson();
 
-    // you already have this for sets
+
     public List<Set> parseSetsFromJson(String json) {
         JsonObject root = JsonParser.parseString(json).getAsJsonObject();
         JsonArray data = root.getAsJsonArray("data");
@@ -41,7 +41,7 @@ public class PokemonTcgApiClient {
         return result;
     }
 
-    // NEW: parse cards
+
     public List<Card> parseCardsFromJson(String json) {
         JsonObject root = JsonParser.parseString(json).getAsJsonObject();
         JsonArray data = root.getAsJsonArray("data");
@@ -61,7 +61,6 @@ public class PokemonTcgApiClient {
                     ? obj.get("supertype").getAsString()
                     : null;
 
-            // nested "set" object → its "id"
             String setId = obj.getAsJsonObject("set").get("id").getAsString();
 
             Card c = new Card(id, name, rarity, cardType, setId);

@@ -68,7 +68,6 @@ public class JdbcSetRepository implements ISetRepository {
         }
     }
 
-    // Not required by interface, but useful while developing
     public int countSets() {
         String sql = "SELECT COUNT(*) FROM sets";
         try (Connection conn = getConnection();

@@ -15,14 +15,13 @@ import java.util.List;
 
 public class SeedAll {
 
-    // Reads the same env vars your repos use
     private static final String URL  = System.getenv("DB_URL");
     private static final String USER = System.getenv("DB_USER");
     private static final String PASS = System.getenv("DB_PASS");
 
     public static void main(String[] args) {
         try {
-            // 0) Make sure all tables exist
+
             DBSetUp.ensureSchema();
 
             JdbcSetRepository setRepo = new JdbcSetRepository();
@@ -30,13 +29,11 @@ public class SeedAll {
             PokemonTcgApiClient apiClient = new PokemonTcgApiClient();
 
             System.out.println("---- DB Connection Info ----");
-            setRepo.debugConnection();
+            //setRepo.debugConnection();
 
-            // 1) Seed SETS from sets.json (if present)
+
             seedSetsFromJson(setRepo, apiClient, "/sets.json");
 
-            // 2) Seed CARDS from one or more cards JSON files
-            // Add/remove filenames here as you like:
             String[] cardFiles = {
                     "/cards_base1.json"
                     // "/cards_base2.json",
@@ -44,7 +41,7 @@ public class SeedAll {
             };
             seedCardsFromJsonFiles(cardRepo, apiClient, cardFiles);
 
-            // 3) Seed DECKS + DECK_CARDS (demo deck)
+
             seedDemoDeckAndCards();
 
             System.out.println("✅ Seeding complete.");
@@ -54,9 +51,7 @@ public class SeedAll {
         }
     }
 
-    // -------------------------
-    // 1) Seed Sets
-    // -------------------------
+
     private static void seedSetsFromJson(JdbcSetRepository setRepo,
                                          PokemonTcgApiClient apiClient,
                                          String resourcePath) {
@@ -80,9 +75,7 @@ public class SeedAll {
         }
     }
 
-    // -------------------------
-    // 2) Seed Cards
-    // -------------------------
+
     private static void seedCardsFromJsonFiles(JdbcCardRepository cardRepo,
                                                PokemonTcgApiClient apiClient,
                                                String[] resourcePaths) {
@@ -96,7 +89,7 @@ public class SeedAll {
                 System.out.println("Parsed " + cards.size() + " cards from " + path);
 
                 for (Card c : cards) {
-                    cardRepo.save(c);   // your save() has ON CONFLICT DO NOTHING
+                    cardRepo.save(c);
                     totalInserted++;
                 }
 
@@ -111,9 +104,7 @@ public class SeedAll {
         System.out.println("Cards count after seeding = " + cardRepo.findAll().size());
     }
 
-    // -------------------------
-    // 3) Seed Decks + Deck_Cards
-    // -------------------------
+
     private static void seedDemoDeckAndCards() {
         if (URL == null || USER == null || PASS == null) {
             System.out.println("DB env vars missing; skipping demo deck seeding.");
@@ -123,7 +114,7 @@ public class SeedAll {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
             conn.setAutoCommit(false);
 
-            // 3a) Upsert a deck by name (so reruns don’t crash)
+
             int deckId;
             String upsertDeck = """
                 INSERT INTO decks (name, description)
@@ -142,7 +133,7 @@ public class SeedAll {
                 }
             }
 
-            // 3b) Grab 3 existing card ids to add to the deck
+
             List<String> cardIds = new ArrayList<>();
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT id FROM cards ORDER BY id LIMIT 3");
@@ -158,7 +149,7 @@ public class SeedAll {
                 return;
             }
 
-            // 3c) Insert into deck_cards
+
             String upsertDeckCards = """
                 INSERT INTO deck_cards (deck_id, card_id, quantity)
                 VALUES (?, ?, ?)
@@ -174,7 +165,7 @@ public class SeedAll {
                     ps.setInt(3, qty);
                     ps.executeUpdate();
                     System.out.println("Added to Demo Deck: " + cardId + " x" + qty);
-                    qty = 1; // first card x2, rest x1
+                    qty = 1;
                 }
             }
 
@@ -187,9 +178,7 @@ public class SeedAll {
         }
     }
 
-    // -------------------------
-    // Utility: load resource file
-    // -------------------------
+
     private static String loadResource(String path) throws IOException {
         try (InputStream is = SeedAll.class.getResourceAsStream(path)) {
             if (is == null) throw new IOException("Resource not found: " + path);
