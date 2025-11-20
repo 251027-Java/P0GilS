@@ -44,7 +44,6 @@ public class Deck {
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    // Handy for JDBC mapping (Timestamp -> LocalDateTime)
     public void setCreatedAt(Timestamp ts) {
         this.createdAt = (ts == null) ? null : ts.toLocalDateTime();
     }
