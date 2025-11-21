@@ -65,7 +65,7 @@ public class SeedAll {
                 setRepo.save(s); // should be safe if save() uses ON CONFLICT
             }
 
-            System.out.println("Sets count after seeding = " + setRepo.countSets());
+            //System.out.println("Sets count after seeding = " + setRepo.countSets());
 
         } catch (IOException e) {
             System.out.println("No " + resourcePath + " found. Skipping sets seeding.");

@@ -68,19 +68,19 @@ public class JdbcSetRepository implements ISetRepository {
         }
     }
 
-    public int countSets() {
-        String sql = "SELECT COUNT(*) FROM sets";
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            rs.next();
-            return rs.getInt(1);
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error counting sets", e);
-        }
-    }
+//    public int countSets() {
+//        String sql = "SELECT COUNT(*) FROM sets";
+//        try (Connection conn = getConnection();
+//             Statement stmt = conn.createStatement();
+//             ResultSet rs = stmt.executeQuery(sql)) {
+//
+//            rs.next();
+//            return rs.getInt(1);
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error counting sets", e);
+//        }
+//    }
 
     private Set mapRow(ResultSet rs) throws SQLException {
         Set s = new Set();

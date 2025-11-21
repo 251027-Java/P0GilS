@@ -16,10 +16,6 @@ public class CardService {
         this.setRepo = setRepo;
     }
 
-    public List<Card> getAllCards() {
-        return cardRepo.findAll();
-    }
-
     public Card getCardById(String id) {
         if (id == null || id.isBlank()) {
             throw new IllegalArgumentException("Card id cannot be empty.");

@@ -17,19 +17,4 @@ public class SetService {
         return setRepo.findAll();
     }
 
-    public Set getSetById(String id) {
-        if (id == null || id.isBlank()) {
-            throw new IllegalArgumentException("Set id cannot be empty.");
-        }
-
-        return setRepo.findAll()
-                .stream()
-                .filter(s -> id.equals(s.getId()))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public boolean setExists(String id) {
-        return getSetById(id) != null;
-    }
 }

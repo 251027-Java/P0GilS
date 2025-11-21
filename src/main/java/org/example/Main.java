@@ -97,8 +97,7 @@ public class Main {
                 8) Delete a deck
                 0) Exit
                 -------------------------
-                Enter choice:
-                """);
+                Enter choice:""");
     }
 
     // Actions
@@ -131,7 +130,7 @@ public class Main {
         }
 
         System.out.println("\n--- Cards in set: " + setId + " ---");
-        cards.stream().limit(50).forEach(c ->
+        cards.stream().limit(100).forEach(c ->
                 System.out.println(
                         c.getId() + " | " +
                                 c.getName() + " | " +
@@ -139,7 +138,7 @@ public class Main {
                                 c.getCardType()
                 )
         );
-        System.out.println("(showing up to 50 cards)\n");
+        //System.out.println("(showing up to 50 cards)\n");
     }
 
     private void createDeck() {

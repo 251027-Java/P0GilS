@@ -61,8 +61,4 @@ public class DeckCardService {
         return deckCardRepo.findByDeckId(deckId);
     }
 
-    public boolean clearDeck(int deckId) {
-        if (deckId <= 0) throw new IllegalArgumentException("Deck id must be positive.");
-        return deckCardRepo.clearDeck(deckId);
-    }
 }

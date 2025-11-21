@@ -39,17 +39,6 @@ public class DeckService {
         return d;
     }
 
-    public Deck getDeckByName(String name) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Deck name cannot be empty.");
-        }
-        Deck d = deckRepo.findByName(name);
-        if (d == null) {
-            throw new IllegalArgumentException("No deck found with name: " + name);
-        }
-        return d;
-    }
-
     public boolean deleteDeck(int id) {
         getDeckById(id);
         return deckRepo.deleteById(id);

@@ -68,7 +68,7 @@ public class JdbcDeckCardRepository implements IDeckCardRepository {
 
     @Override
     public List<DeckCardView> findByDeckId(int deckId) {
-        // JOIN so you can show real card info in your demo
+        // JOIN
         String sql = """
             SELECT dc.deck_id,
                    dc.card_id,
