@@ -6,7 +6,6 @@ import org.example.model.Deck;
 import java.util.List;
 
 public class DeckService {
-
     private final IDeckRepository deckRepo;
 
     public DeckService(IDeckRepository deckRepo) {

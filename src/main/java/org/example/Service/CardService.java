@@ -1,17 +1,17 @@
 package org.example.Service;
 
 import org.example.Repository.ICardRepository;
+import org.example.Repository.ISetRepository;
 import org.example.Repository.JdbcSetRepository;
 import org.example.model.Card;
 
 import java.util.List;
 
 public class CardService {
-
     private final ICardRepository cardRepo;
-    private final JdbcSetRepository setRepo;
+    private final ISetRepository setRepo;
 
-    public CardService(ICardRepository cardRepo, JdbcSetRepository setRepo) {
+    public CardService(ICardRepository cardRepo, ISetRepository setRepo) {
         this.cardRepo = cardRepo;
         this.setRepo = setRepo;
     }
