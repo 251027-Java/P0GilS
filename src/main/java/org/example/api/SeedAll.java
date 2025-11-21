@@ -44,7 +44,7 @@ public class SeedAll {
 
             seedDemoDeckAndCards();
 
-            System.out.println("✅ Seeding complete.");
+            System.out.println("Seeding complete.");
 
         } catch (Exception e) {
             e.printStackTrace();
